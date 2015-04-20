@@ -1,0 +1,24 @@
+buildscript {
+  repositories { jcenter() }
+  dependencies {
+    classpath "com.github.jengelman.gradle.plugins:shadow:1.2.0"
+    classpath (group: "com.sahlbach.gradle", name: "gradle-jetty-eclipse-plugin", version: "1.9.+")
+  }
+}
+
+apply plugin: "java"
+apply plugin: "application"
+apply plugin: "war"
+apply plugin: "jettyEclipse"
+
+sourceCompatibility = JavaVersion.VERSION_1_8
+
+repositories {
+	mavenCentral()
+}
+
+mainClassName = "vjsantojaca.relevante.StartApp"
+
+war {
+	baseName = "test"
+}
