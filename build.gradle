@@ -7,7 +7,6 @@ buildscript {
 }
 
 apply plugin: "java"
-apply plugin: "application"
 apply plugin: "war"
 apply plugin: "jettyEclipse"
 
@@ -17,8 +16,23 @@ repositories {
 	mavenCentral()
 }
 
-mainClassName = "vjsantojaca.relevante.StartApp"
-
 war {
 	baseName = "test"
+}
+
+jettyEclipse {
+
+	additionalRuntimeJars = files( new File("$rootDir/src/main/webapp/WEB-INF/lib/mysql-connector-java-5.0.8-bin.jar") )
+	warFile = file("$rootDir/build/libs/test.war")	
+	jettyConfig = file("$rootDir/jetty.xml")
+	contextPath = ""
+	automaticReload = "true"
+	scanIntervalInSeconds = 5
+	webDefaultXml = file("$rootDir/webdefault.xml")
+
+}
+
+dependencies {
+	compile("javax.servlet:javax.servlet-api:3.1.0")
+	compile("mysql:mysql-connector-java:5.1.34")
 }
