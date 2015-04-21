@@ -1,12 +1,17 @@
 package relevante.test.war;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.mysql.jdbc.Connection;
+
+import relevante.test.bd.ConnectionBD;
 
 @WebServlet(name = "HelloServlet", urlPatterns = {"/helloServlet"})
 public class HelloServlet extends HttpServlet 
@@ -38,6 +43,14 @@ public class HelloServlet extends HttpServlet
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
     {
-        response.getWriter().write("Hello Servlet");
+    	ConnectionBD.createConexionBD();
+    	try(Connection connection = (Connection) ConnectionBD.getConexion();)
+    	{
+            response.getWriter().write("Hello Servlet");
+    		
+    	} catch (ClassNotFoundException | InstantiationException
+				| IllegalAccessException | SQLException e) {
+			e.printStackTrace();
+		}
     }
 }
