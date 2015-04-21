@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<!DOCTYPE Configure PUBLIC "-//Jetty//Configure//EN" "http://www.eclipse.org/jetty/configure.dtd">
+
+
+<Configure class="org.eclipse.jetty.webapp.WebAppContext">
+	<New id="webApp" class="org.eclipse.jetty.webapp.WebAppContext">
+    		<Set name="contextPath">/</Set>
+    		<Set name="war"><SystemProperty name="jetty.home" default="."/>/build/libs/test.war</Set>
+  	</New>
+
+	<New id="relevante" class="org.eclipse.jetty.plus.jndi.Resource">
+		<Arg></Arg>
+		<Arg>jdbc/Relevante</Arg>
+		<Arg>
+	        <New id="relevanteDataSource" class="com.mysql.jdbc.jdbc2.optional.MysqlConnectionPoolDataSource">
+	           <Set name="url">jdbc:mysql://localhost:3306/prueba_test</Set>
+	           <Set name="user">test</Set>
+	           <Set name="password">test</Set>
+	        </New>
+	     </Arg>
+	</New>
+</Configure>
